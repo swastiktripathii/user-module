@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package com.carrental.user.grpc;
+
+option java_package = "com.carrental.user.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "UserServiceProto";
+
+message RegisterUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string userType = 4;
+}
+
+message RegisterUserResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message LoginUserRequest {
+  string email = 1;
+  string password = 2;
+  string ipAddress = 3;
+}
+
+message LoginUserResponse {
+  bool success = 1;
+  string token = 2;
+  string message = 3;
+}
+
+message UploadUsersRequest {
+  repeated UserUploadRow users = 1;
+  string adminToken = 2;
+}
+
+message UserUploadRow {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string userType = 4;
+}
+
+message UploadUsersResponse {
+  repeated string successes = 1;
+  repeated string errors = 2;
+}
+
+message GetLoginHistoryRequest {
+  int64 userId = 1;
+  string adminToken = 2;
+}
+
+message LoginHistoryInfo {
+  string loginTime = 1;
+  string ipAddress = 2;
+}
+
+message GetLoginHistoryResponse {
+  repeated LoginHistoryInfo history = 1;
+}
+
+service UserService {
+  rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse);
+  rpc UploadUsers(UploadUsersRequest) returns (UploadUsersResponse);
+  rpc GetLoginHistory(GetLoginHistoryRequest) returns (GetLoginHistoryResponse);
+}

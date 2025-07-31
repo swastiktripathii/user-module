@@ -1,0 +1,3 @@
+name,email,password,userType
+John Doe,john@example.com,Password123,Employee
+Jane Admin,jane.admin@example.com,AdminPass456,Admin
