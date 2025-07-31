@@ -58,7 +58,7 @@ Create database and user with appropriate privileges (adjust password accordingl
 CREATE DATABASE carrental;
 CREATE USER carrental_user WITH PASSWORD 'YourStrongPass123!';
 GRANT ALL PRIVILEGES ON DATABASE carrental TO carrental_user;
-Step 2: Configure application.yml
+Step 2: Configure application.yml  -- Update accordingly
 Edit src/main/resources/application.yml with your database details:
 
 text
@@ -66,7 +66,7 @@ spring:
 datasource:
 url: jdbc:postgresql://localhost:5432/carrental
 username: carrental_user
-password: YourStrongPass123!
+password: password
 jpa:
 hibernate:
 ddl-auto: update
