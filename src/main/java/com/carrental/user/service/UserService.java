@@ -40,6 +40,4 @@ public class UserService {
     public Optional<User> getUserByIdOptional(Long id) {
         return userRepository.findById(id);
     }
-
-    // Additional methods for login, bulk upload, and login history can be added here
 }
