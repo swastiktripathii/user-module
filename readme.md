@@ -65,8 +65,11 @@ text
 spring:
 datasource:
 url: jdbc:postgresql://localhost:5432/carrental
+
 username: carrental_user
+
 password: YourStrongPass123!
+
 jpa:
 hibernate:
 ddl-auto: update
