@@ -5,6 +5,7 @@ import com.carrental.user.model.User;
 import com.carrental.user.model.UserType;
 import com.carrental.user.repository.LoginHistoryRepository;
 import com.carrental.user.service.UserService;
+import com.carrental.user.security.JwtUtil;
 import com.opencsv.CSVReader;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final LoginHistoryRepository loginHistoryRepository;
+    private final JwtUtil jwtUtil;
 
     // RegisterUser implementation
     @Override
@@ -79,8 +81,8 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
                     .build();
             loginHistoryRepository.save(loginHistory);
 
-            // Generate dummy JWT token or session token (implement your token generation here)
-            String token = UUID.randomUUID().toString();
+            // Generate JWT token
+            String token = jwtUtil.generateToken(user.getEmail());
 
             LoginUserResponse response = LoginUserResponse.newBuilder()
                     .setSuccess(true)
@@ -109,7 +111,6 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
         List<String> errors = new ArrayList<>();
 
         try {
-            // Check admin token or Auth here if implemented - assuming always authorized for this example
 
             // Parse users from request
             if (request.getUsersCount() == 0) {
@@ -195,4 +196,3 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
         }
     }
 }
-

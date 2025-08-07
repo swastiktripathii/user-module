@@ -149,6 +149,22 @@ Passwords must be strong and handled securely.
 
 Always verify userType values are either "Admin" or "Employee".
 
+
+## **Docker Usage**
+
+##### Build Docker Image
+
+Run this command in your project root (where the Dockerfile is located):
+docker build -t user-module:latest .
+
+##### Run Docker Container
+
+Start the container and expose the gRPC port:
+docker run -p 6565:6565 user-module:latest
+Notes
+Make sure you have built your JAR file (e.g., using mvn clean package) before building the Docker image.
+The application will be accessible on port 6565.
+
 # **Summary**
 
 This project leverages modern backend technologies and gRPC for high-performance API communication. It demonstrates secure user management, role-based access, and scalable designs such as bulk user uploads and login tracking with PostgreSQL persistence.
